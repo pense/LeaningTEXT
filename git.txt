@@ -1,111 +1,111 @@
 git
 
 ===
-$B#1(B.$B:n6H%G%#%l%/%H%j(B
+１.作業ディレクトリ
 
-$B#2!%%9%F!<%8%s%0%(%j%"!J%$%s%G%C%/%9!K(B
+２．ステージングエリア（インデックス）
 
-$B#3!%%j%]%8%H%j(B($B%m!<%+%k!"%j%b!<%H!K(B
+３．リポジトリ(ローカル、リモート）
 
 ===
 
-// git$B$N@_Dj(B
+// gitの設定
 > git config --global user.name ""
 > git config --global user.email ""
 > git config --global color.ui true
 
-// git$B$N%(%$%j%"%9@_Dj(B
+// gitのエイリアス設定
 > git config --global alias.co checkout
 > git config --global alias.st status
 > git config --global alias.br branch
 > git config --global alias.ci commit
 
-// git$B$N@_Dj3NG'!!(B
+// gitの設定確認　
 > git config -l
 
-// git$B$N%X%k%W(B
+// gitのヘルプ
 > git config --help
 
 
-// git$B$G;HMQ$9$k%G%#%l%/%H%j$N@k8@(B
+// gitで使用するディレクトリの宣言
 > git init
 
-// $B%m%0$N3NG'(B
+// ログの確認
 > git log
 > git log --oneline
-> git log -p // $BJQ99MzNr$NI=<((B
-> git log --stat // $B$I$N%U%!%$%k$,2?2U=jJQ99$5$l$?$+$rI=<((B
+> git log -p // 変更履歴の表示
+> git log --stat // どのファイルが何箇所変更されたかを表示
 
-// $B%U%!%$%k$,$I$N>uBV$G$"$k$+$r3NG'(B
-> git status // $B>uBV(B($B$I$N%9%F!<%8$K$"$k$+(B)$B$rI=<((B
+// ファイルがどの状態であるかを確認
+> git status // 状態(どのステージにあるか)を表示
 
-// $B%"%I(B $B%9%F!<%8%s%0%(%j%"$K%U%!%$%k$r>e$2$k(B
+// アド ステージングエリアにファイルを上げる
 > git add [file_name]
-> git add . // $B:n6H%G%#%l%/%H%j$K$"$k$9$Y$F$N%U%!%$%k$,BP>](B
+> git add . // 作業ディレクトリにあるすべてのファイルが対象
 
-// $B%3%_%C%H(B
-> git commit // $B%(%G%#%?$,N)$A>e$,$k$N$G!"MzNrEy$N%a%C%;!<%8$r=q$-9~$`(B
+// コミット
+> git commit // エディタが立ち上がるので、履歴等のメッセージを書き込む
 > git commit -m "[memo]"
-> git commit --amend // $BBg$7$?JQ99=P$J$$>l9g$N%3%_%C%H$NJQ99!#!JL5BL$K%3%_%C%H$rA}$d$7$?$/$J$$;~$NBP1~!K(B
+> git commit --amend // 大した変更出ない場合のコミットの変更。（無駄にコミットを増やしたくない時の対応）
 
-// $B%9%F!<%8%s%0%(%j%"$K>e$2$kA0$N%U%!%$%k$NJQ992U=j$r85$KLa$9(B
+// ステージングエリアに上げる前のファイルの変更箇所を元に戻す
 > git chechout -- [file_name]
 
-// $B%9%F!<%8%s%0%(%j%"$K>e$2$kA0$N%U%!%$%k$N:9J,$r3NG'(B
+// ステージングエリアに上げる前のファイルの差分を確認
 > git diff
 
-// $B%9%F!<%8%s%0%(%j%"$K>e$2$?%U%!%$%k(B($B%3%_%C%HA0(B)$B$N:9J,$r3NG'(B
+// ステージングエリアに上げたファイル(コミット前)の差分を確認
 > git diff --cached
 
-// $B4IM}%U%!%$%k$N:o=|(B
-> git rm [file_name] //git$B%3%^%s%I$G%U%!%$%k$r:o=|$9$k!#$3$&$7$J$$$H(B
+// 管理ファイルの削除
+> git rm [file_name] //gitコマンドでファイルを削除する。こうしないと
 
-// git$B4IM}$K4^$a$J$$@_Dj(B
-// $B:n6H%G%#%l%/%H%j$K(B .gitignore$B%U%!%$%k$r:n@.$7!"4^$a$J$$%U%!%$%kL>$r5-F~$9$k(B
-// .gitignore$B%U%!%$%k$O!"$=$l0J2<$N%5%V%U%)%k%@$K$bM-8z(B
+// git管理に含めない設定
+// 作業ディレクトリに .gitignoreファイルを作成し、含めないファイル名を記入する
+// .gitignoreファイルは、それ以下のサブフォルダにも有効
 
-// $B%9%F!<%8%s%0%(%j%"$K>e$2$?%U%!%$%k!J%3%_%C%HA0!K$N%P!<%8%g%s$r85$KLa$9(B
-> git reset --hard HEAD // HEAD$B$H$OD>A0$b$N$r;XDj(B
-> git reset --hard HEAD^ //HEAD^$B$H$OD>A0$N0l$DA0$N$b$N$r;XDj(B
-> git reset --hard  [commit_id] // $B:GDc#77e$N(Bid$B$r5-:\$9$l$PM-8z(B
+// ステージングエリアに上げたファイル（コミット前）のバージョンを元に戻す
+> git reset --hard HEAD // HEADとは直前ものを指定
+> git reset --hard HEAD^ //HEAD^とは直前の一つ前のものを指定
+> git reset --hard  [commit_id] // 最低７桁のidを記載すれば有効
 
-// git reset$B$7$?$"$H$K$=$l$r<h$jLa$9J}K!(B
-> git reset --hard ORIG_HEAD // ORIG_HEAD$B$H$O!"D>A0$K(Breset$B$7$?(Bid
+// git resetしたあとにそれを取り戻す方法
+> git reset --hard ORIG_HEAD // ORIG_HEADとは、直前にresetしたid
 
-// $B%V%i%s%A!JJL%P!<%8%g%s$rJB9T$7$F3+H/!K(B
-> git branch // $B%V%i%s%A$N3NG'(B
+// ブランチ（別バージョンを並行して開発）
+> git branch // ブランチの確認
 > git branch [branch_name]
-> git checkout [branch_name] // $B%V%i%s%A$r0\F0!JJQ99!K(B
-> git checkout -b [branch_name] // $B%V%i%s%A$r:n@.$7!"0\F0(B
+> git checkout [branch_name] // ブランチを移動（変更）
+> git checkout -b [branch_name] // ブランチを作成し、移動
 
-// $B%V%i%s%A$r%^!<%8!J<h$j9~$`!K(B
-> git merge [branch_name] // $BH?1G$7$?$$%V%i%s%A$K9T$C$F!"%^!<%8$7$?$$%V%i%s%A$r;XDj(B
+// ブランチをマージ（取り込む）
+> git merge [branch_name] // 反映したいブランチに行って、マージしたいブランチを指定
 
-// $B%V%i%s%A$N:o=|(B
+// ブランチの削除
 > git branch -d [branch_name]
 
-// $B%^!<%8$N>WFM(B(conflict)$B$r2r7h$9$k(B
-// $B%(%G%#%?$G%U%!%$%k$r3+$/$H>WFM2U=j$,I=5-$5$l$F$$$k$N$G!"@5$7$$J}$r;D$7$F!":o=|$9$k(B
+// マージの衝突(conflict)を解決する
+// エディタでファイルを開くと衝突箇所が表記されているので、正しい方を残して、削除する
 
-// $B%?%0$r$D$1$k(B
+// タグをつける
 > git tag [tag_name]
 
-// $B%?%0$rI=<($9$k(B
+// タグを表示する
 > git tag
 
-// $B%?%0;XDj$G%U%!%$%k$N>uBV$rI=<($9$k(B
+// タグ指定でファイルの状態を表示する
 > git show [tag_name]
 
-// $B%?%0$rJQ99$9$k(B
+// タグを変更する
 > git tag [tag_name] [commit_id]
 
-// $B%?%0$r:o=|$9$k(B
+// タグを削除する
 > git tag -d [tag_name]
 
 
-// $B6&F1:n6H(B
+// 共同作業
 ===
-$B6&M-%j%]%8%H%j(B ourweb.git
+共有リポジトリ ourweb.git
 
 A myweb
 
@@ -113,22 +113,22 @@ B myweb2
 
 ===
 
-// $B6&M-%j%]%8%H%j$G$N(Binit
+// 共有リポジトリでのinit
 > git init -bare
 
-// push $B6&M-%j%]%8%H%j$K%U%!%$%k$rEPO?(B
-> git remote add origin [$B6&M-%j%]%8%H%j%G%#%l%/%H%j(B]
+// push 共有リポジトリにファイルを登録
+> git remote add origin [共有リポジトリディレクトリ]
 
-// $B6&M-%j%]%8%H%j$N%U%!%$%k$r:o=|(B
+// 共有リポジトリのファイルを削除
 > git remote rm origin
 
-// $B6&M-%j%]%8%H%j$K(Bmaster$BFbMF$rH?1G(B
+// 共有リポジトリにmaster内容を反映
 > git push origin master
 
-// $B6&M-%j%]%8%H%j$+$i%U%!%$%k$r<h$j9~$`(B
-> git clone [$B6&M-%j%]%8%H%j%G%#%l%/%H%j(B] [$B%m!<%+%k:n6H%G%#%l%/%H%j(B]
+// 共有リポジトリからファイルを取り込む
+> git clone [共有リポジトリディレクトリ] [ローカル作業ディレクトリ]
 
-// $B6&M-%j%]%8%H%j$NFbMF$r%m!<%+%k$N%U%!%$%k$K%^!<%8$9$k(B
+// 共有リポジトリの内容をローカルのファイルにマージする
 > git pull origin master
 
 
