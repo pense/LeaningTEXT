@@ -1,0 +1,135 @@
+git
+
+===
+
+1.作業ディレクトリ
+
+２．ステージングエリア（インデックス）
+
+３．リポジトリ(ローカル、リモート）
+
+===
+
+// gitの設定
+> git config --global user.name ""
+> git config --global user.email ""
+> git config --global color.ui true
+
+// gitのエイリアス設定
+> git config --global alias.co checkout
+> git config --global alias.st status
+> git config --global alias.br branch
+> git config --global alias.ci commit
+
+// gitの設定確認　
+> git config -l
+
+// gitのヘルプ
+> git config --help
+
+
+// gitで使用するディレクトリの宣言
+> git init
+
+// ログの確認
+> git log
+> git log --oneline
+> git log -p // 変更履歴の表示
+> git log --stat // どのファイルが何箇所変更されたかを表示
+
+// ファイルがどの状態であるかを確認
+> git status // 状態(どのステージにあるか)を表示
+
+// アド ステージングエリアにファイルを上げる
+> git add [file_name]
+> git add . // 作業ディレクトリにあるすべてのファイルが対象
+
+// コミット
+> git commit // エディタが立ち上がるので、履歴等のメッセージを書き込む
+> git commit -m "[memo]"
+> git commit --amend // 大した変更出ない場合のコミットの変更。（無駄にコミットを増やしたくない時の対応）
+
+// ステージングエリアに上げる前のファイルの変更箇所を元に戻す
+> git chechout -- [file_name]
+
+// ステージングエリアに上げる前のファイルの差分を確認
+> git diff
+
+// ステージングエリアに上げたファイル(コミット前)の差分を確認
+> git diff --cached
+
+// 管理ファイルの削除
+> git rm [file_name] //gitコマンドでファイルを削除する。こうしないと
+
+// git管理に含めない設定
+// 作業ディレクトリに .gitignoreファイルを作成し、含めないファイル名を記入する
+// .gitignoreファイルは、それ以下のサブフォルダにも有効
+
+// ステージングエリアに上げたファイル（コミット前）のバージョンを元に戻す
+> git reset --hard HEAD // HEADとは直前ものを指定
+> git reset --hard HEAD^ //HEAD^とは直前の一つ前のものを指定
+> git reset --hard  [commit_id] // 最低７桁のidを記載すれば有効
+
+// git resetしたあとにそれを取り戻す方法
+> git reset --hard ORIG_HEAD // ORIG_HEADとは、直前にresetしたid
+
+// ブランチ（別バージョンを並行して開発）
+> git branch // ブランチの確認
+> git branch [branch_name]
+> git checkout [branch_name] // ブランチを移動（変更）
+> git checkout -b [branch_name] // ブランチを作成し、移動
+
+// ブランチをマージ（取り込む）
+> git merge [branch_name] // 反映したいブランチに行って、マージしたいブランチを指定
+
+// ブランチの削除
+> git branch -d [branch_name]
+
+// マージの衝突(conflict)を解決する
+// エディタでファイルを開くと衝突箇所が表記されているので、正しい方を残して、削除する
+
+// タグをつける
+> git tag [tag_name]
+
+// タグを表示する
+> git tag
+
+// タグ指定でファイルの状態を表示する
+> git show [tag_name]
+
+// タグを変更する
+> git tag [tag_name] [commit_id]
+
+// タグを削除する
+> git tag -d [tag_name]
+
+
+// 共同作業
+===
+共有リポジトリ ourweb.git
+
+A myweb
+
+B myweb2
+
+===
+
+// 共有リポジトリでのinit
+> git init -bare
+
+// push 共有リポジトリにファイルを登録
+> git remote add origin [共有リポジトリディレクトリ]
+
+// 共有リポジトリのファイルを削除
+> git remote rm origin
+
+// 共有リポジトリにmaster内容を反映
+> git push origin master
+
+// 共有リポジトリからファイルを取り込む
+> git clone [共有リポジトリディレクトリ] [ローカル作業ディレクトリ]
+
+// 共有リポジトリの内容をローカルのファイルにマージする
+> git pull origin master
+
+
