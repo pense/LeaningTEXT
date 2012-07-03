@@ -1,0 +1,124 @@
+データベース
+
+- テーブル
+
+--フィールド
+--レコード
+
+// データベースにログインする
+> mysql -u root -p
+
+// データベースの一覧を表示
+> show databases;
+
+// データベースの作成
+> create database　[database_name];
+
+// データベース操作の一班ユーザー作成（パスワード設定）
+> grant all on [database_name].* to [user_name]@[host_name] identified by '[password]';
+//dbuser001 dbpwd001
+
+// データベース使用の宣言
+> use [database_name];
+
+// テーブルを表示
+> show tables;
+
+// テーブルを作成
+> create table [table_name] ([field_name] int, [field_name] varchar());
+
+// テーブルのフィールドデータ型確認
+> desc [table_name];
+
+// テーブルの削除
+> drop tabule users;
+
+// レコードを挿入する
+> insert into users ([field_name], [field_name], [field_name]) values ([record_name], [record_name], [record_name], [record_name]);
+
+// レコードの確認
+> select * from [table_name];
+
+// レコードの変更
+> update [table_name] set id = 2 where name = 'tanaka';
+
+// レコードの削除
+> delete from users where id = 3;
+
+// フィールドの追加　削除
+> alter table [table_name] add [field_name] [date型]; //フィールド追加
+> alter table [table_name] drop [field_name]; //フィールド削除
+
+// フィールドの変更
+> alter table [table_name] [field_name] [New_field_name] varchar();
+> alter table users change email email varchar(100);
+//文字数を減らすと超過分が自動的に削除されるため注意すること！
+
+// レコードに使える型 & オプション & インデックス
+create table users (
+	id int NOT NULL primary key auto_increment,
+	weight float, //doubleでもOK
+	code char(10),
+	name varchar(50),
+	memo text,
+	email varchar(255) unique,
+	password varchar(16)
+	created datetime, DEFAULT '2011-11-11 10:00:00'
+	sex enum('male','female'),
+	KEY code (code)
+);
+
+// auto_increment時のレコード挿入の仕方
+> insert into users (id, .....) values (null, .....);
+> insert into users (weight, .....) values (55.5, .....);
+
+// select文の他の書き方
+> select id, name from users;
+> select name, id from users;
+> select * from users\G  // \Gはフィールドの縦表示を指示
+> select * from users where id = 1;
+> select * from users where id != 1;
+> select * from users where id > 1;
+> select * from users where name like '%yosh%';
+> select * from users order by name;
+> select * from users order by name DESC; //降順表示
+> select * from users where id > 1 order by name DESC;
+> select * from users limit 2;
+> select * from users order by id limit 2;
+
+// 関数
+> select length([fiel]) from [table_name];
+> select length(email), name from users;
+> select * from [table_name] order by length([field_name]);
+> select replace(email, 'foo.com', 'hoge.net'), name from users;
+//実際のレコードは変更されずに、表示（出力）だけ変更する。
+
+> select substring(email, 3), name from users;
+> select substring(email, -3), name from users;
+> select substring(email, 3, 2), name from users; //3文字目から２文字返す
+
+// 数学関数
+> select ceil([field_name]) from [database_name]; //切り上げ
+> select floor([field_name]) from [database_name]; //切り捨て
+
+> select rand(); //乱数生成
+> select rand(), [field_name] from [database_name] order by rand();
+
+//
+> select now(); //現在時間表示
+> select month([field_name]) from [database_name];
+> select datediff(now(), [field_name]) from [database_name]; //経過日数表示
+
+// バックアップと復元
+> mysqldump -u [user_name] -p [table_name] > [save_file_name];
+> mysqldump -u dbuser001 -p blog_app >blog_app.dump.sql
+
+// 複数のテーブルからselectする
+> select [table_name].[field_name], [table_name2].[field_name2] from [table_name], [table_name2] where [table_name].[field_name] =[値] and [table_name].[field_name] = [table_name2].[field_name2];
+
+// 条件を組み合わせてselectする
+> select posts.title, users.name, posts.created from posts, users where users.id = posts.user_id order by posts.createde desc;
+
+// group byを使う
+> select users.name, count(posts.id) from users, posts where users.id = posts.user_id group by users.id;
+
