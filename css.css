@@ -1,0 +1,214 @@
+/* コメント */
+
+/*
+セレクタ
+プロパティ
+値
+*/
+
+/* *（アスタリスク）は すべての値に適用したい時に使用
+* {
+		color: red;
+}
+*/
+
+/* ID要素　*/
+/* ID要素には、頭に#をつけること */
+#header {
+		background-color: red;
+}
+
+#main {
+		background-color: blue;
+		float:left; /* 回り込みを指定 */
+		width: 300px;
+		color: red;
+		font-size:36px;
+}
+
+#sidebar {
+		background-color: yellow;
+		float:right;
+		width: 100px;
+}	
+
+#footer {
+		background-color: green;
+		clear:both;
+}
+
+/* class要素　*/
+/* class要素には、頭に.をつけること */
+.test {
+		font-size: 9px;
+
+		line-height: 30px;
+		text-decoration: underline line-through;
+		font-style: italic;
+}
+
+.change {
+		cursor: wait; /* help; pointer; move; */
+}
+
+#main, .rei { /* 複数の要素を指定 */
+		border: 1px solid #ccc;
+}
+
+#greet .person { /* カンマでなくスペースで区切ると親要素より下位要素にある要素にだけ効果がある */
+		color: red;
+}
+
+#greet > .person { /* カンマでなく不等号で区切ると親要素の直下に指定要素があるときだけ効果がある（孫以下の要素には効果ない） */
+		color: red;
+}
+
+span.person {
+		color: green;
+}
+
+/* 擬似クラス */
+.person:hover { /* マウスオーバーしたときだけ効果 */
+		color: red;
+}
+
+li:first-child {
+		color: green;
+}
+
+li:last-child {
+		color: blue;
+}
+
+#onamae:focus { /* フォーカスされたときだけ効果 */
+		font-weight: bold;
+}
+
+#box1 {
+		background-color: gray;
+		width: 50%; /* ブラウザの幅に対して50%といった指定も可能 */
+		height: 15px;
+
+		/*
+		border-color: green;
+		border-width: 5px;
+		border-style: solid;
+		*/
+		border: green 5px solid;
+		/* 上記の様に省略形で書くことも可能 */
+
+		border-bottom-color: blue;
+		border-bottom-width: 5px;
+		border-bottom-style: solid;
+
+		/*
+		余白
+		padding:親要素に対する内側の余白
+		margin:親要素に対する外側の余白
+		*/
+		padding: 1px 10px 2px 5px;
+		margin: 40px;
+		/* 値が、
+		１つの時は、上下左右
+		２つの時は、１つ目が上下、２つ目が左右
+		３つの時は、１つ目が上、２つ目が左右、３つ目が下
+		４つの時は、１つ目が上、２つ目が右、３つ目が下、４つ目が左　->時計回り
+		*/
+}
+
+/*
+セレクタの優先順位
+１．あとから書いたほうが優先される
+２．id > class
+３．詳細に指定したほうが優先される
+４．!important 多用し過ぎは禁物
+*/
+#id1 {
+		color: red !important;
+}
+
+/* position: static, relative（当初位置からの相対位置で）, absolute（親要素から）, fixed */
+#id2 {
+		position:relative;
+}
+
+#free {
+		position: absolute;
+		top: -10px;
+}
+
+#id3 {
+		position: relative;
+		left: 30px;
+		top: 30px;
+		left: 50px;
+}
+
+#id4 {
+		position: fixed;
+		bottom: 0;
+}
+
+/* 要素の重なり: z-index */
+#id5 {
+		position: relative;
+		left: 0;
+		background-color: red;
+		z-index:2;
+
+}
+
+#id6 {
+		position: relative;
+		top: -50px;
+		left: 10px;
+		background-color: blue;
+		z-index:1;
+}
+
+#id7 {
+		position: relative;
+		top: -100px;
+		left: 20px;
+		background-color: green;
+		z-index:3;
+}
+
+
+h1 {
+		color: red;
+}
+
+p {
+		/* RGB表記 */
+		color: #00ff00;
+		font-size: 14px;
+		font-weight: bold;
+		text-align: left;
+}
+
+ul {
+		list-style-type: square; /* circle; none; */
+		list-style-position: inside; /* outside */
+}
+
+ol {
+		list-style-type: hiragana; /* lower-alpha */
+}
+
+li {
+		display: block; /* ブロック要素、インライン要素を指定 */
+}
+
+a {
+		display: inline; /* ブロック要素、インライン要素を指定 */
+}
+
+body {
+		background-color: #bca78d;
+		background-image: url('monster002.jpg');
+		background-repeat: repeat-x; /* no-repeatを使うと１回だけの表示が可能  */
+		background-position: 10px 10px; /* top rightとすると右上に表示 */
+		background-attachment: fixed;
+		/* fixedはスクロールしても定位置に表示。scroll（デフォルト）はスクロールにあわせて表示 */
+}
