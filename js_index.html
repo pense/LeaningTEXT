@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+		<head>
+				<meta charset="UTF-8">
+				<title>javaScriptの練習</title>
+		</head>
+		<body>
+				<h1>JavaScriptの練習</h1>
+				<p>僕の名前は<span id="myName">@pense</span>です！</p>
+				<p>価格:<input type="text" id="price">円</p>
+				<p><input type="button" value="クリック！" id="myButton"></p>
+				<script>
+						// 変数を使う
+					var message;
+					message = "Hello World, Again!";
+					alert(message);
+
+					// データ型
+					var d1 = -5.5; // 数値
+					var d2 = false; // 真偽
+					var d3 = undefined; // 定義されていない
+					var d4 = null; // 何もない
+
+					// 演算子
+					// 代入演算子 =
+					var x = 5;
+					// 文字列に関する演算子 +
+					var s = "Hello" + "World";
+					// 数値に関する演算子 + - * / %
+					var x = 5 / 5;
+					var x = 5 % 5; //余り
+
+					var x = 1;
+					x++; // x = x + 1
+					x--; // x = x - 1
+					x += 5; // x = x +5
+
+					// 条件分岐 (if)
+					var score = 20;
+					if (score >= 70) { // 比較演算子 >= <= < > == !=
+							alert("合格！");
+							} else if (score >= 30) {
+							alert("不合格！");
+							} else {
+							alert("不合格だしお話になりません！");
+					}
+
+					// 条件分岐 (switch)
+					var direction = "right";
+					switch (direction) {
+							case "right":
+							x = x + 10;
+							break;
+							case "left":
+							x = x - 10;
+							break;
+							case "up":
+							y = y - 10;
+							break;
+							case "down":
+							y += 10;
+							break;
+							default:
+							// 例外処理
+							break;
+					}
+
+					// ループ (while)
+					var i = 0;
+					while (i < 10) {
+							console.log(i);
+							i++;
+					}
+
+					// ループ　(for)
+					for (var i =0; i < 10; i++) {
+							console.log(i);
+					}
+
+					// 関数　（複数の処理をまとめられる）
+					function sum(a,b) { // aとbは「引数」
+							return (a + b);
+					}
+
+					var result = sum(50, 33);
+					alert(result);
+
+					// ローカル変数
+					function getPrice(x) {
+							var rate = 0.82; // ローカル変数（関数の外から使えない）
+							return (x * rate);
+					}
+
+					console.log(getPrice(83));
+					// console.log(rate); // ローカル変数を使ってみようとしてもエラーになる
+
+					// 配列　グループ化されたデータ
+					var sales0 = 100;
+					var salse1 = 200;
+					var salse2 = 300;
+
+					// 配列を一度に記載
+					var sales = [100,200,150];
+
+					console.log(sales[1]);
+
+					// 連想配列 添字にラベル（文字列）を使うことができる
+					var sales = {'year2000':100, 'year2001':200, 'year2002':150}
+
+					console.log(sales['year2002']);
+
+					// JavaScriptオブジェクト
+					// 日付、数値、文字列
+					var s = new String("this is a pen.");
+					console.log(s.length); // プロパティ（属性）
+					console.log(s.substr(2,2));
+					console.log(s.replace("pen","pencil"));
+
+					var d = new Date();
+					console.log(d.getFullYear()); // メソッド（処理）
+
+					// JavaScriptオブジェクト　(Array)
+					// var a = new Array(12, 33, 44, 55);
+					var a = [12, 33, 44, 55];
+
+					console.log(a.join("|"));
+					console.log(a.reverse());
+
+					// JavaScriptオブジェクト (Date)
+					var d = new Date(2012, 4, 22, 7, 44, 5); // 月：0〜11
+					console.log(d.getMonth());
+					console.log(d.getTime());
+
+					// JavaScriptオブジェクト (Math)
+					// var m = new Math();
+					// プロパティ
+					console.log(Math.PI);
+					console.log(Math.SQRT2);
+
+					// メソッド
+					var x = 5.238;
+					console.log(Math.floor(x));
+					console.log(Math.ceil(x));
+					console.log(Math.round(x));
+
+					console.log(Math.random());
+
+					// JavaScriptオブジェクト (Browser) - Browser Object Model (BOM)
+					console.log(window.innerHeight);
+					// window.location.href = "http://google.com"; // 指定したURLへ移動
+
+					// 文書(Document) - Document Object Model (DOM)
+					console.log(document.width);
+					document.body.bgColor = 'red';
+
+					// idを指定して値を操作
+					var e = document.getElementById('myName');
+					e.innerHTML = 'パンセ';
+
+					var n = document.getElementById('price');
+					n.value = 500;
+
+					// DOM - Event
+					var e = document.getElementById('myButton');
+					e.onclick = function () {
+							alert("クリックされました");
+					}
+
+					// タイマー処理
+					// setTimeout: 一定時間後に何かする
+					setTimeout(function () {
+							console.log("２秒たちました！");
+					}, 2000);
+
+					// setInterval: 一定時間ごとに何かする
+					var i = 0;
+					setInterval(function() {
+							console.log(i);
+							i++;
+					},1000);
+
+
+					// オブジェクトをしらべるとき、MDNでしらべると日本語表示も可能
+
+				</script>
+		</body>
+
+</html>
+
