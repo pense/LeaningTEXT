@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+		<head>
+				<meta charset="UTF-8">
+				<title>正規表現の勉強</title>
+		</head>
+		<body>
+				<script>
+						// メタ文字
+						var s = '@taguchi, @fkoji, @dotinstall';
+
+						// [abc] abcのうちどれか
+						// [a-z] a〜zのうちどれか
+						// [^abc] abc以外
+						// . -> 任意の一文字
+						// ^ -> 行頭
+						// $ -> 行末
+
+						// taguchi toguchi どちらであってもマッチさせたい場合
+						var rs = s.match(/t[ao]guchi/);
+						// taguchi toguchi のどちらにもマッチさせたくない場合
+						var rs = s.match(/t[^ao]guchi/);
+						// t.guchi .の部分がなにであってもマッチさせたい場合
+						var rs = s.match(/t...chi/);
+						// 行の先頭に文字列がある時だけマッチさせたい場合
+						var rs = s.match(/^@taguchi/);
+						// 行末に文字列がある時だけマッチさせたい場合
+						var rs = s.match(/install$/);
+						// １行に次の文字列だけの時にマッチさせたい場合
+						//var s = '@taguchi';
+						var rs = s.match(/^@taguchi$/);
+
+						if (rs) {
+								console.log("マッチしました");
+								} else {
+								console.log("マッチしませんでした");
+						}
+
+						// {} -> 直前の文字の繰り返し回数
+						// 0{2,} -> 00, 000, 0000000000~
+						// 0{2,4} -> 00, 000, 0000　2〜4回までマッチ
+						var s = 'atttatata, abc';
+
+						// ta または tt を2回以上繰り返す時にマッチさせたい場合
+						var rs = s.match(/[ta]{2,}/);
+						// ta または tt を2回~4回繰り返す時にマッチさせたい場合
+						var rs = s.match(/[ta]{2,4}/);
+
+						if (rs) {
+								console.log("マッチしました");
+								} else {
+								console.log("マッチしませんでした");
+						}
+
+						// a? -> 0 or 1文字の繰り返し -> , a
+						// a* -> 0文字以上の繰り返し -> , a, aa, aaa~
+						// a+ -> 1文字以上の繰り返し -> a, aa, aaa~
+						var s = 'atttatata, abc';
+
+						// atの後tを１回以上繰り返す時にマッチさせたい場合
+						var rs = s.match(/att+/);
+
+						if (rs) {
+								console.log("マッチしました");
+								} else {
+								console.log("マッチしませんでした");
+						}
+
+						// () -> 複数の文字列をひとまとまりとする
+						// |　-> or条件
+						//var s = 'aabcaabbcc, dee';
+						var s = 'aabccaabbcc, dee';
+
+						// abc または def が１回以上繰り返される時にマッチさせたい場合
+						var rs = s.match(/(abc|def)+/);
+
+						if (rs) {
+								console.log("マッチしました");
+								} else {
+								console.log("マッチしませんでした");
+						}
+
+						// \ -> 改行
+						// \t -> タブ
+						// \d -> [0-9]
+						// \w -> 英数字と_ [A-Za-z0-9_]
+						// \s -> スペース、タブ
+						// \メタ文字 -> メタ文字
+						var s = '+++';
+
+						// _を含む英数字が１回以上繰り返される時にマッチさせたい場合
+						var rs = s.match(/\w+/);
+						// +が１回以上繰り返される時にマッチさせたい場合
+						var rs = s.match(/\++/);
+
+						if (rs) {
+								console.log("マッチしました");
+								} else {
+								console.log("マッチしませんでした");
+						}
+
+						// フラグ
+						// i -> 大文字小文字を区別しない
+						// g -> すべてのマッチした要素を配列で返す
+						// m -> 複数行に対応させる -> ^ $　をそれぞれ対応させる
+						var s = '@Toguchi, @dotinstall\n@Taguchi\n@teguchi';
+
+						// aを含む時場合にすべて配列で返す
+						var rs = s.match(/a/g);
+						console.log(rs);
+
+						// 大文字小文字を区別せず、taを含む時にマッチさせたい場合
+						var rs = s.match(/@ta/i);
+						// 複数行を読み込んで、行頭にtaを含む時にマッチさせたい場合
+						var rs = s.match(/^@ta/m);
+						// 複数行の行頭に、大文字小文字を区別せず@taを含む時にマッチさせたい場合
+						var rs = s.match(/^@ta/im);
+
+						if (rs) {
+								console.log("マッチしました");
+								} else {
+								console.log("マッチしませんでした");
+						}
+
+						// 最小マッチ-> * + のあとに ? を付ける 
+						var s = 'taguchi@dotinstall.com, fkoji@dotinstall.com, admin@dotinstall.com';
+
+						// 任意の文字繰り返しのあと@dotinstall.comを含む時にマッチさせたい場合
+						var rs = s.match(/.+@dotinstall.com/);
+						console.log(rs);
+						// 任意の文字繰り返しのあと@dotinstall.comを含む時に最小マッチさせたい場合
+						var rs = s.match(/.+?@dotinstall.com/);
+						console.log(rs);
+
+
+						// () RegExp
+						var s = 'taguchi@dotinstall.com';
+
+						// ()で囲んだ部分をRegExpで取り出す
+						var rs = s.match(/((.+?)@dotinstall.(com))/);
+						console.log(RegExp.$1);
+						console.log(RegExp.$2);
+						console.log(RegExp.$3);
+
+						// twitterIDを抽出
+						var s = '@taguchi';
+						var rs = s.match(/(@[A-Za-z0-9_]{1,15})/);
+						console.log(RegExp.$1);
+
+						// タイトルタグを抽出
+						var s = '<title>ドットインストール</title>';
+						var rs = s.match(/<title>([^<]+)<\/title>/);
+						console.log(RegExp.$1);
+
+						// 日付を日本語表記になおす
+						var s= '2012-03-24'; // 2012年03月24日
+						//var s= '2012/03/24'; // 2012年03月24日
+						var rs = s.match(/(\d{4})[-\/](\d{2})[-\/](\d{2})/);
+						console.log(RegExp.$1+'年'+RegExp.$2+'月'+RegExp.$3+'日');
+
+						</script>
+		</body>
+</html>
+
