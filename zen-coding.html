@@ -1,0 +1,147 @@
+<!-- Zen-Coding 記法と展開の仕方 -->
+
+
+<!-- Zen-Codingコマンドのまとめ -->
+<!-- 展開 [Ctrl+y][,] -->
+<!-- 画像サイズの補完 [Ctrl+y][,]で展開後、Ctrl+y],[i] -->
+
+<!-- 複数の要素の中でカーソルの移動 -->
+	<!-- [Ctrl+y],[n]で進む -->
+	<!-- [Ctrl+y],[Shift+n]で戻る -->
+
+<!-- 先に書いたテキストをaタグ要素に変換　[Ctrl+y],[a] -->
+<!-- 先に書いた複数のテキストを要素に展開 -->
+	<!-- ヴィジュアルモードで囲んで、[Ctrl+y][,] Tag:が表示されたら、Zen記法を記入 -->
+
+<!-- 要素のコメントアウト、コメントアウト解除 -->
+	<!-- コメントアウトしたい行で [Ctrl+y][/] -->
+	<!-- コメントアウト解除したい行で [Ctrl+y][/] -->
+
+
+<!-- Zen-Coding記法の展開 [Ctrl+y][,] -->
+html:5 ->
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    
+</body>
+</html>
+
+div ->
+<div></div>
+
+link:css ->
+<link media="all" rel="stylesheet" href="style.css" type="text/css" />
+
+link:favicon ->
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+script ->
+<script type="text/javascript"></script>
+
+a:link ->
+<a href="http://"></a>
+
+mail:link ->
+<mail:link></mail:link>
+
+input:hidden ->
+<input name="" type="hidden" />
+
+<!-- 入れ子の要素 -->
+ul>li ->
+<ul>
+    <li></li>
+</ul>
+
+div>div>div>p<<hr ->
+<div>
+    <div>
+        <div>
+            <p></p>
+        </div>
+    </div>
+    <hr />
+</div>
+
+div>div>p+hr ->
+<div>
+    <div>
+        <p></p>
+        <hr />
+    </div>
+</div>
+
+<!-- 同列に要素追加 -->
+ul>li*3 ->
+
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+
+<!-- idやclassを付ける -->
+ul#menu>li.item ->
+<ul id="menu">
+    <li class="item"></li>
+</ul>
+
+ul#menu>li#item-$$*5 ->
+<ul id="menu">
+    <li id="item-01"></li>
+    <li id="item-02"></li>
+    <li id="item-03"></li>
+    <li id="item-04"></li>
+    <li id="item-05"></li>
+</ul>
+
+select[name=city]>option[value=$]*5 ->
+<select id="" name="city">
+    <option value+1="" value=""></option>
+    <option value+2="" value=""></option>
+    <option value+3="" value=""></option>
+    <option value+4="" value=""></option>
+    <option value+5="" value=""></option>
+</select>
+
+<!-- 画像のサイズ追加や、先に書いたテキストをタグに変換する -->
+img[src="monster002.jpg"] -> <!-- [Ctrl+y][,]で展開後、Ctrl+y],[i]でサイズを自動追記 -->
+<img src="monster002.jpg" alt="" width="400" height="400" />
+
+http://dotinstall.com -> <!-- [Ctrl+y],[a]でaタグに自動変換 -->
+<a href="http://dotinstall.com">3分動画でマスターする初心者向けプログラミング学習サイト - ドットインストール</a>
+
+<!-- 複数の要素の中でカーソルの移動 -->
+<!-- [Ctrl+y],[n]で進む -->
+<!-- [Ctrl+y],[Shift+n]で戻る -->
+
+<!-- 先に書いたテキストを要素で囲む -->
+ホーム
+事業内容
+お問い合わせ
+ヘルプ
+
+<!-- ヴィジュアルモードで囲んで、[Ctrl+y][,] Tag:が表示されたら、Zen記法で展開 -->
+<ul id="menu">
+    <li><a href="">ホーム</a></li>
+    <li><a href="">事業内容</a></li>
+    <li><a href="">お問い合わせ</a></li>
+    <li><a href="">ヘルプ</a></li>
+</ul>
+
+
+<!-- 要素のコメントアウト、コメントアウト解除 -->
+<ul>
+    <li>menu 1</li>
+		<!-- <li>menu 2</li> --> <!-- コメントアウトしたい行で [Ctrl+y][/] -->
+		<li>menu 3</li> <!-- コメントアウト解除したい行で [Ctrl+y][/] -->
+    <li>menu 4</li>
+    <li></li>
+</ul>
+
+
