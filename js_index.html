@@ -10,6 +10,7 @@
 				<p>僕の名前は<span id="myName">@pense</span>です！</p>
 				<p>価格:<input type="text" id="price">円</p>
 				<p><input type="button" value="クリック！" id="myButton"></p>
+				<p><input type="button" value="クリックしてね！" onclick="sayHi();"></p>
 				<script>
 						// 変数を使う
 					var message;
@@ -49,6 +50,10 @@
 					var x = 1;
 					x++; // x = x + 1
 					x--; // x = x - 1
+					++x;
+					--x;
+					// 先に演算子が来る場合と後に来る場合の違いは、
+					// 変数に値を代入する際、演算して渡すのか、演算前に渡すのかの違い。
 					x += 5; // x = x +5
 
 					// 条件分岐 (if)
@@ -60,6 +65,26 @@
 							} else {
 							alert("不合格だしお話になりません！");
 					}
+
+					// 厳密な比較演算子 === !==
+					// 値だけでなく、型の比較も行う（文字列の５と数字の５の比較など）
+
+					// 論理演算子 AND(&&) OR(||) NOT(!)
+
+					// 三項演算子
+					// （条件） ? 真だった場合の値 : 偽だった場合の値
+					var sex ='男性';
+					price = (sex == '男性') ? 5000 : 3000;
+					// これをif文で書くと以下になる
+					/*
+					if (sex == '男性') {
+							price = 5000;
+							} else {
+							price = 3000;
+					}
+					*/
+
+					console.log(price);
 
 					// 条件分岐 (switch)
 					var direction = "right";
@@ -81,6 +106,28 @@
 							break;
 					}
 
+					// 同じ処理になる条件をまとめて書くことも可
+					var x = 0;
+					switch (x) {
+							case 0:
+							case 1:
+							//
+							break;
+							default:
+							//
+							break;
+					}
+
+					// true / false 真偽
+
+					// 文字列：空文字だとfalse
+					// 数値：0かNaNだとfalse
+					// undefined = false
+					// null = false
+					// true/false = そのまま
+					// object/配列 = true （空配列でもtrue）
+
+
 					// ループ (while)
 					var i = 0;
 					while (i < 10) {
@@ -88,10 +135,49 @@
 							i++;
 					}
 
+					// ループ(do while)
+					do {
+							//
+					} while (i < 10);
+					// 条件の合否に関わらず1度処理がされ、その後条件判定によって処理が実行される
+
 					// ループ　(for)
 					for (var i =0; i < 10; i++) {
 							console.log(i);
 					}
+
+					// ループ(for/while/do..while) break
+					var i = 0;
+					while (i < 10) {
+							i++;
+							console.log(i);
+							if (i == 5) {
+									break;
+							}
+					}
+
+					// ループ(for/while/do..while) continue 処理をスキップする
+					var i = 0;
+					while (i < 10) {
+							i++;
+							if (i == 5) {
+									continue;
+							}
+							console.log(i);
+					}
+
+					// confirm ユーザに確認する
+					// ok→true cancel→false
+					if (confirm("削除しますか？")) {
+							alert("削除します");
+							} else {
+							alert("削除をやめます！");
+					}
+
+					// prompt ユーザに入力を求める
+					var name =prompt("あなたのお名前は？", "name");
+					alert('あなたのお名前は' + name + 'ですね！');
+
 
 					// 関数　（複数の処理をまとめられる）
 					function sum(a,b) { // aとbは「引数」
@@ -100,6 +186,16 @@
 
 					var result = sum(50, 33);
 					alert(result);
+
+					// 即時関数 ()で囲むことで宣言と呼び出しを同時に実行できる
+					(function helloWorld() {
+							console.log("hello world");
+					})();
+
+					// 無名関数 関数名を省略できる
+					(function() {
+							console.log("foo bar");
+					})();
 
 					// ローカル変数
 					function getPrice(x) {
@@ -161,6 +257,20 @@
 
 					console.log(Math.random());
 
+					// 乱数
+					// Math.random()
+					// 0から9までの整数値
+					var x = Math.floor(Math.random() * 10);
+					console.log(x);
+
+					// 0からnまでの整数値
+					var x = Math.floor(Math.random() * (n+1));
+					console.log(x);
+
+					// 1から6まで
+					var y = Math.floor(Math.random() * 6) + 1;
+					console.log(y);
+
 					// JavaScriptオブジェクト (Browser) - Browser Object Model (BOM)
 					console.log(window.innerHeight);
 					// window.location.href = "http://google.com"; // 指定したURLへ移動
@@ -183,18 +293,46 @@
 					}
 
 					// タイマー処理
-					// setTimeout: 一定時間後に何かする
+					// setTimeout: 一定時間後に何かする。
+					// 前回の処理が終わったかを考慮する→ずれる可能性があるがクラッシュしない。
 					setTimeout(function () {
 							console.log("２秒たちました！");
 					}, 2000);
 
-					// setInterval: 一定時間ごとに何かする
+					// setInterval: 一定時間ごとに何かする。
+					// 前回の処理が終わったか考慮しないため、
+					// 処理が設定した時間以上にかかるとクラッシュする可能性がある。
+					/*
 					var i = 0;
 					setInterval(function() {
-							console.log(i);
-							i++;
+							console.log(++i);
 					},1000);
 
+					// タイマーを止める clearInterval, clearTimeout
+					var i = 0;
+					var timeId = setInterval(function() {
+							console.log(++i);
+							if (i >= 5) {
+									clearInterval(timeId);
+							}
+					},1000);
+					*/
+
+					// クラッシュしないようにsetTimeoutを使って一定時間ごとに処理する
+					var i = 0;
+					function plusOne() {
+							console.log(++i);
+							var timeId = setTimeout(plusOne, 1000);
+							if ( i >= 6 ) {
+									clearTimeout(timeId);
+							}
+					}
+					plusOne();
+
+					// イベントと関数の紐付け
+					function sayHi() {
+					console.log('hi!');
+					}
 
 					// オブジェクトをしらべるとき、MDNでしらべると日本語表示も可能
 
